@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body><h1>Student Form</h1>
+    <div class="container">
+    <form id="studentForm" onsubmit="save(event)">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td><input placeholder="Your name" id="name"></td>
+            </tr>
+            <tr>
+                <td>Age:</td>
+                <td><input type="number" placeholder="Your age" id="age"></td>
+            </tr>
+            <tr>
+                <td>Gender:</td>
+                <td><label><input type="radio" name="gender" value="Male">Male</label></td>
+                <td><label><input type="radio" name="gender" value="Female">Female</label></td>
+            </tr>
+            <tr>
+                <td>Course</td>
+                <td><select id="course">
+                    <option value="Javascript">Javascript</option>
+                    <option value="Python">Python</option><option value="C++">C++</option><option value="Java">Java</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input placeholder="Your mail id" id="email"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit" id="btns">Save</button></td>
+            </tr>
+        </table>
+    </form>
+    <table width="70%"><thead>
+        <tr>
+        <th>NAME</th>
+        <th>AGE</th>
+        <th>COURSE</th>
+        <th>GENDER</th>
+        <th>EMAIL</th>
+        <th>ACTION</th>
+        </tr></thead>
+
+        <tbody id="datatable">
+ 
+        </tbody>
+    </table></div>
+</body>
+</html>
+<script>
+    function save(event){
+        event.preventDefault();
+    var name=document.getElementById("name").value;
+    var age=document.getElementById("age").value;
+    var gender=document.querySelector('input[name="gender"]:checked').value;
+    var course=document.getElementById("course").value;
+    var email=document.getElementById("email").value;
+    var datatable=document.getElementById("datatable");
+    var row=datatable.insertRow();
+    row.innerHTML=`
+    <td>${name}</td>
+    <td>${age}</td>
+    <td>${gender}</td>
+    <td>${course}</td>
+    <td>${email}</td>
+    <td><button class="delbtn" onclick="deleteRow(this)">Delete</button></td>`;
+    document.getElementById("studentForm").reset();}
+    function deleteRow(button)
+    {
+        var row=button.parentElement.parentElement;
+        row.remove();
+    }
+</script>
